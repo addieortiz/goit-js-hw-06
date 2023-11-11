@@ -18,18 +18,36 @@ const galleryList = document.querySelector(".gallery");
 const listContent = images
   .map(
     (image) =>
-      `<li class="gallery-item"><img src="${image.url}" alt="${image.alt}</li>`
+      `<li class="gallery-item">
+      <img src="${image.url}" alt="${image.alt}" class="gallery-image">
+      </li>`
   )
   .join("");
 
 galleryList.insertAdjacentHTML("beforeend", listContent);
 
+const styles = `
+.gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  }
+
+.gallery-item {
+  gap: 20px;
+  margin: 20px;
+  border: 10px solid cyan;
+}
+  
+.gallery-image {
+  width: 480px;
+  height: 320px;
+}`;
+
 // styling CSS
-const galleryStyle = document.querySelector(".gallery-item");
-galleryStyle.style.display = "flex";
-galleryStyle.style.flexWrap = "wrap";
-galleryStyle.style.flexDirection = "column";
-galleryStyle.style.alignContent = "center";
-galleryStyle.style.listStyleType = "none";
-galleryStyle.style.gap = "20px";
-console.log(galleryList.innerHTML);
+const galleryStyle = document.createElement("style");
+
+galleryStyle.textContent = styles;
+
+document.head.append(galleryStyle);
